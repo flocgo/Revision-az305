@@ -51,6 +51,115 @@
         <span class="bg-blue-100 p-2 rounded-lg text-blue-600"><i class="fas fa-database"></i></span>
         Azure Storage Account Capabilities
     </h3>
+                <section id="storage" class="mb-12 scroll-mt-10">
+    <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+        <span class="bg-blue-100 p-2 rounded-lg text-blue-600"><i class="fas fa-database"></i></span>
+        Azure Storage Account & Security
+    </h3>
+    
+    <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6 overflow-hidden">
+        <h4 class="font-bold text-sm mb-4 text-blue-700 underline uppercase">1. Capacités et Réplication</h4>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-[10px] border-collapse">
+                <thead>
+                    <tr class="bg-slate-800 text-white uppercase italic">
+                        <th class="p-2 border border-slate-700">Type</th>
+                        <th class="p-2 border border-slate-700">Services</th>
+                        <th class="p-2 border border-slate-700">Access Tiers</th>
+                        <th class="p-2 border border-slate-700">Replication</th>
+                    </tr>
+                </thead>
+                <tbody class="text-slate-700">
+                    <tr>
+                        <td class="p-2 border font-bold bg-orange-50 text-orange-700 italic">GPv2</td>
+                        <td class="p-2 border">All (Blob, File, Table, Queue, ADLS Gen2)</td>
+                        <td class="p-2 border font-bold text-center">Hot, Cool, Archive</td>
+                        <td class="p-2 border italic text-red-600">LRS, GRS, ZRS, GZRS</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2 border font-bold bg-purple-50 text-purple-700 italic">BlockBlob</td>
+                        <td class="p-2 border font-bold uppercase text-[9px]">Premium Only (Blobs)</td>
+                        <td class="p-2 border text-center text-slate-400">N/A</td>
+                        <td class="p-2 border italic">LRS, ZRS</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <h4 class="font-bold text-blue-700 mb-3 italic"><i class="fas fa-user-lock mr-2"></i>Autorisation d'accès</h4>
+            <div class="space-y-2 text-[11px]">
+                <div class="flex justify-between border-b pb-1">
+                    <span class="font-semibold">Anonymous read</span>
+                    <span class="text-blue-600 italic">Blobs uniquement</span>
+                </div>
+                <div class="flex justify-between border-b pb-1">
+                    <span class="font-semibold">Azure AD (RBAC)</span>
+                    <span>Blobs, Queues (Files via AAD DS)</span>
+                </div>
+                <div class="flex justify-between border-b pb-1">
+                    <span class="font-semibold text-orange-600">SAS (Shared Access Signature)</span>
+                    <span class="text-right italic">Tout sauf Azure File (Requis AzCopy)</span>
+                </div>
+                <div class="flex justify-between border-b pb-1">
+                    <span class="font-semibold">Shared Key</span>
+                    <span class="font-bold uppercase">Tous les services</span>
+                </div>
+            </div>
+            <div class="mt-4 p-2 bg-yellow-50 border-l-2 border-yellow-400 text-[10px]">
+                <strong>Stored Access Policy :</strong> Permet de grouper des SAS et de les <strong>révoquer instantanément</strong> en supprimant la politique ou en changeant les clés.
+            </div>
+        </div>
+
+        <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <h4 class="font-bold text-blue-700 mb-3 italic"><i class="fas fa-coins mr-2"></i>Gestion des Coûts (Tiering)</h4>
+            <div class="space-y-3">
+                <div class="p-2 bg-red-50 rounded border border-red-100">
+                    <span class="font-bold text-[11px] block text-red-700">Archive Tier (180j+)</span>
+                    <p class="text-[10px]">Coût Stockage MIN | Coût Accès MAX. Récupération : <strong>jusqu'à 15h</strong>.</p>
+                </div>
+                <div class="p-2 bg-blue-50 rounded border border-blue-100">
+                    <span class="font-bold text-[11px] block text-blue-700">Cool Tier (30j+)</span>
+                    <p class="text-[10px]">Stockage moins cher qu'en Hot. Accès plus cher.</p>
+                </div>
+                <div class="p-2 bg-orange-50 rounded border border-orange-100">
+                    <span class="font-bold text-[11px] block text-orange-700 text-center uppercase">Hot Tier (Frequent reads)</span>
+                    <p class="text-[10px] text-center italic">Coût Stockage MAX | Coût Accès MIN.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card bg-slate-900 text-white p-6 rounded-xl shadow-lg border border-slate-700">
+        <h4 class="font-bold mb-4 flex items-center gap-2 italic text-blue-400">
+            <i class="fas fa-shield-alt"></i> Data Protection & Immutability (WORM)
+        </h4>
+        <div class="grid md:grid-cols-2 gap-6 text-[11px]">
+            <div class="space-y-3">
+                <div class="border-l-2 border-blue-500 pl-3">
+                    <span class="font-bold text-blue-300 block uppercase italic">Time-based Retention</span>
+                    Blobs créés/lus mais <strong>non modifiables/non supprimables</strong> pendant l'intervalle.
+                    <p class="mt-1 text-red-400 italic">⚠️ Même le propriétaire ne peut pas supprimer le SA si la policy est lockée.</p>
+                </div>
+                <div class="border-l-2 border-green-500 pl-3">
+                    <span class="font-bold text-green-300 block uppercase italic">Legal Hold</span>
+                    Immutabilité jusqu'à ce que les <strong>tags de hold</strong> soient manuellement supprimés.
+                </div>
+            </div>
+            <div class="bg-slate-800 p-4 rounded-lg">
+                <span class="font-bold text-blue-300 block mb-2 uppercase italic text-center">Encryption</span>
+                <ul class="space-y-1 italic text-slate-300">
+                    <li>• Par défaut : Microsoft-managed keys.</li>
+                    <li>• Customer-managed keys (BYOK) : <strong>Uniquement Blobs & Files</strong>.</li>
+                    <li>• Key Vault doit être dans la <strong>MÊME RÉGION</strong> que le SA.</li>
+                    <li>• <strong>Hierarchical Namespace :</strong> Requis pour les permissions Azure AD sur des Blobs individuels.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
     
     <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6 overflow-hidden">
         <div class="flex justify-between items-center mb-4">
