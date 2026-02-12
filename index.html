@@ -2,19 +2,181 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Révisions AZ-305</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZ-305 - Master Revision Notes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: auto; }
-        h1 { color: #0078d4; } /* Bleu Azure */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .sidebar-link:hover { background-color: #e2e8f0; border-radius: 8px; }
+        .card { transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); }
+        .exam-tip { border-left: 4px solid #ef4444; background: #fef2f2; }
+        .az-blue { color: #0078d4; }
+        .bg-az-blue { background-color: #0078d4; }
     </style>
 </head>
-<body>
-    <h1>Objectifs AZ-305</h1>
-    <ul>
-        <li>Conception d'identité, de gouvernance et de monitoring</li>
-        <li>Conception de solutions de stockage de données</li>
-        <li>Conception de continuité d'activité</li>
-        <li>Conception d'infrastructures</li>
-    </ul>
-</body>
-</html>
+<body class="flex">
+
+    <nav class="hidden md:block w-72 h-screen bg-white border-r sticky top-0 p-6 overflow-y-auto">
+        <div class="flex items-center gap-2 mb-8">
+            <i class="fas fa-cloud az-blue text-2xl"></i>
+            <h1 class="font-bold text-xl tracking-tight">AZ-305 Prep</h1>
+        </div>
+        <ul class="space-y-4 text-gray-600 font-medium">
+            <li><a href="#storage" class="sidebar-link block p-2"><i class="fas fa-database mr-2"></i> Storage & Data</a></li>
+            <li><a href="#cosmos" class="sidebar-link block p-2"><i class="fas fa-infinity mr-2"></i> Cosmos DB</a></li>
+            <li><a href="#sql" class="sidebar-link block p-2"><i class="fas fa-table mr-2"></i> Azure SQL & MI</a></li>
+            <li><a href="#network" class="sidebar-link block p-2"><i class="fas fa-network-wired mr-2"></i> Networking</a></li>
+            <li><a href="#compute" class="sidebar-link block p-2"><i class="fas fa-server mr-2"></i> Compute & Apps</a></li>
+            <li><a href="#identity" class="sidebar-link block p-2"><i class="fas fa-user-shield mr-2"></i> Identity & Governance</a></li>
+        </ul>
+    </nav>
+
+    <main class="flex-1 p-4 md:p-10 max-w-5xl mx-auto">
+        
+        <header class="mb-10 text-center md:text-left">
+            <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Révision Solutions Architect Expert</h2>
+            <p class="text-slate-500">Optimisé pour la mémorisation des concepts clés et des flux de décision.</p>
+        </header>
+
+        <section id="storage" class="mb-12 scroll-mt-10">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+                <span class="bg-blue-100 p-2 rounded-lg text-blue-600"><i class="fas fa-database"></i></span>
+                Storage Account & Data Lake
+            </h3>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-lg mb-3">🔥 Premium vs Standard</h4>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li><span class="font-semibold">BlockBlobStorage:</span> Idéal pour haut débit et latence minimale (SSD).</li>
+                        <li><span class="font-semibold">Immutabilité:</span> Retention Policy au niveau du container (interdit modif/delete).</li>
+                        <li><span class="font-semibold">GZRS:</span> Protection contre panne régionale + zone. Attention : lecture seule si pas de failover.</li>
+                    </ul>
+                </div>
+
+                <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-lg mb-3">📡 Connectivité Storage</h4>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li><span class="font-semibold text-blue-600">Service Endpoints:</span> Trafic via Azure Backbone. Pas pour le On-premise.</li>
+                        <li><span class="font-semibold text-green-600">Private Endpoint:</span> IP privée dans le VNET. VPN/ExpressRoute requis pour On-premise.</li>
+                        <li><span class="font-semibold">Hierarchical Namespace:</span> Active Data Lake Gen2 (Sécurité niveau fichier/dossier).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="cosmos" class="mb-12 scroll-mt-10">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+                <span class="bg-purple-100 p-2 rounded-lg text-purple-600"><i class="fas fa-infinity"></i></span>
+                Azure Cosmos DB
+            </h3>
+            <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="p-3 font-bold text-slate-700">Consistance</th>
+                                <th class="p-3 font-bold text-slate-700">Description / Use Case</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y">
+                            <tr><td class="p-3 font-semibold">Strong</td><td class="p-3">Lecture garantie la plus récente. Latence élevée.</td></tr>
+                            <tr><td class="p-3 font-semibold text-blue-600">Bounded Staleness</td><td class="p-3">Lag défini (temps/version). Idéal pour collab globale.</td></tr>
+                            <tr><td class="p-3 font-semibold text-green-600">Session</td><td class="p-3 text-green-700 font-medium">Panier d'achat (Shopping Basket). Cohérence par utilisateur.</td></tr>
+                            <tr><td class="p-3 font-semibold">Consistent Prefix</td><td class="p-3">Ordre respecté mais données anciennes possibles.</td></tr>
+                            <tr><td class="p-3 font-semibold">Eventual</td><td class="p-3">Plus rapide, aucune garantie d'ordre (Likes/Retweets).</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4 p-4 exam-tip rounded-r-lg">
+                    <p class="text-sm"><strong>Exam Tip:</strong> Multi-region writes se configure au niveau du <strong>compte</strong> CosmosDB. API (SQL, MongoDB, Gremlin) choisie à la création.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sql" class="mb-12 scroll-mt-10">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+                <span class="bg-indigo-100 p-2 rounded-lg text-indigo-600"><i class="fas fa-table"></i></span>
+                Azure SQL & Managed Instance
+            </h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-lg mb-3 text-indigo-600">Managed Instance (MI)</h4>
+                    <p class="text-sm text-slate-600 mb-4">Le meilleur pour le <strong>Lift & Shift</strong> avec compatibilité SQL totale.</p>
+                    <ul class="list-disc ml-5 text-sm text-slate-600 space-y-1">
+                        <li>Supporte Database Mail & Linked Servers.</li>
+                        <li>Nécessite un Subnet délégué.</li>
+                        <li>Auto-Failover Group (Cross-region).</li>
+                    </ul>
+                </div>
+                <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-lg mb-3 text-indigo-600">SQL Database (PaaS)</h4>
+                    <ul class="list-disc ml-5 text-sm text-slate-600 space-y-1">
+                        <li><strong>Serverless:</strong> Auto-pause (Économie si utilisé 1j/mois).</li>
+                        <li><strong>Hyperscale:</strong> Jusqu'à 100TB, auto-scaling rapide.</li>
+                        <li><strong>Active Geo-replication:</strong> Niveau DB seule (Read-only secondary).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="network" class="mb-12 scroll-mt-10">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+                <span class="bg-green-100 p-2 rounded-lg text-green-600"><i class="fas fa-network-wired"></i></span>
+                Network Architecture
+            </h3>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6">
+                <h4 class="font-bold mb-4 border-b pb-2">Load Balancing Decision</h4>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="p-3 bg-slate-50 rounded border">
+                        <p class="font-bold text-xs text-slate-500 uppercase">App Gateway</p>
+                        <p class="text-sm">L7, Régional, WAF, SSL Offload, URL-based routing.</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded border">
+                        <p class="font-bold text-xs text-slate-500 uppercase">Front Door</p>
+                        <p class="text-sm font-semibold text-blue-600">L7, Global, CDN intégré, HTTP/S accéléré.</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded border">
+                        <p class="font-bold text-xs text-slate-500 uppercase">Traffic Manager</p>
+                        <p class="text-sm font-semibold text-green-600">DNS-based, Global, Basculement de région.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card bg-slate-800 text-white p-6 rounded-xl shadow-lg">
+                <h4 class="font-bold mb-3"><i class="fas fa-search-location mr-2"></i> Network Watcher Tools</h4>
+                <ul class="grid grid-cols-2 gap-4 text-xs">
+                    <li class="border-l-2 border-blue-400 pl-2"><span class="block font-bold">IP Flow Verify</span> Check si un paquet est bloqué par un NSG.</li>
+                    <li class="border-l-2 border-blue-400 pl-2"><span class="block font-bold">Next Hop</span> Troubleshoot les routes (UDR).</li>
+                    <li class="border-l-2 border-blue-400 pl-2"><span class="block font-bold">NSG Flow Logs</span> Historique complet du trafic stocké dans un SA.</li>
+                    <li class="border-l-2 border-blue-400 pl-2"><span class="block font-bold">Connection Monitor</span> Métriques de connectivité entre VM.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="identity" class="mb-12 scroll-mt-10">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+                <span class="bg-orange-100 p-2 rounded-lg text-orange-600"><i class="fas fa-user-shield"></i></span>
+                Identity & Governance
+            </h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold mb-3">Managed Identities</h4>
+                    <p class="text-xs text-slate-500 mb-4">Élimine les secrets dans le code.</p>
+                    <div class="space-y-3">
+                        <div class="p-2 bg-blue-50 rounded text-xs">
+                            <span class="font-bold block">System-Assigned</span> 1 Identity = 1 Ressource. Cycle de vie lié.
+                        </div>
+                        <div class="p-2 bg-orange-50 rounded text-xs">
+                            <span class="font-bold block">User-Assigned</span> Stand-alone. Peut être partagé par plusieurs ressources.
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold mb-3">Governance</h4>
+                    <ul class="text-sm space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-1"></i> <strong>Azure Policy:</strong> `DeployIfNotExists` pour forcer TDE sur SQL.</li>
+                        <li><i class="fas fa-check text-green-500 mr-1"></i> <strong>Blueprints:</strong> Définit des standards (RG, Policy, RBAC) réutilisables.</li>
+                        <li><i class="fas fa-check text-green-500 mr-1"></i>
