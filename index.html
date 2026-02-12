@@ -218,6 +218,92 @@
                 <span class="bg-green-100 p-2 rounded-lg text-green-600"><i class="fas fa-network-wired"></i></span>
                 Network Architecture
             </h3>
+            <section id="network" class="mb-12 scroll-mt-10">
+    <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+        <span class="bg-green-100 p-2 rounded-lg text-green-600"><i class="fas fa-network-wired"></i></span>
+        Load Balancing Decision Tree
+    </h3>
+
+    <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+        <div class="flex justify-between items-center mb-6 border-b pb-2">
+            <h4 class="font-bold text-lg text-green-700">Guide de sélection des services</h4>
+            <span class="text-[10px] bg-green-100 text-green-700 px-2 py-1 rounded-full font-bold uppercase">Decision Flow</span>
+        </div>
+
+        <div class="space-y-4">
+            <div class="flex items-start gap-4">
+                <div class="bg-slate-100 p-3 rounded-lg min-w-[200px] text-center border-2 border-slate-200">
+                    <p class="text-[10px] font-bold text-slate-500 uppercase">Type de trafic</p>
+                    <p class="text-xs font-bold uppercase italic">Web Application (HTTP/S) ?</p>
+                </div>
+                <div class="flex-1 space-y-3">
+                    <div class="p-3 bg-green-50 rounded-lg border border-green-200">
+                        <p class="text-[11px] mb-2"><span class="font-bold text-green-700">OUI</span> → <strong>Internet Facing ?</strong></p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="bg-white p-2 rounded border border-green-100 text-[10px]">
+                                <span class="font-bold block text-blue-600">NON (Interne)</span>
+                                🚀 <span class="font-bold italic">Application Gateway</span>
+                            </div>
+                            <div class="bg-white p-2 rounded border border-green-100 text-[10px]">
+                                <span class="font-bold block text-blue-600">OUI (Public)</span>
+                                🌍 <strong>Global ?</strong> → <span class="text-red-600 font-bold italic">Azure Front Door</span> (+ AppGW si SSL Offload requis)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-red-50 rounded-lg border border-red-200">
+                        <p class="text-[11px] mb-2"><span class="font-bold text-red-700">NON (Non-HTTP/TCP/UDP)</span> → <strong>Internet Facing ?</strong></p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="bg-white p-2 rounded border border-red-100 text-[10px]">
+                                <span class="font-bold block text-blue-600">NON</span>
+                                🔌 <span class="font-bold italic">Azure Load Balancer (Internal)</span>
+                            </div>
+                            <div class="bg-white p-2 rounded border border-red-100 text-[10px]">
+                                <span class="font-bold block text-blue-600">OUI</span>
+                                ⚡ <span class="font-bold italic italic">Azure Load Balancer (Public)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-2">
+            <div class="p-2 border rounded bg-slate-50 text-center">
+                <p class="text-[9px] font-bold text-slate-400 uppercase">L7 / Global</p>
+                <p class="text-[11px] font-extrabold text-blue-600 italic italic">Front Door</p>
+            </div>
+            <div class="p-2 border rounded bg-slate-50 text-center">
+                <p class="text-[9px] font-bold text-slate-400 uppercase">L7 / Régional</p>
+                <p class="text-[11px] font-extrabold text-green-600 italic italic">App Gateway</p>
+            </div>
+            <div class="p-2 border rounded bg-slate-50 text-center">
+                <p class="text-[9px] font-bold text-slate-400 uppercase">L4 / Global</p>
+                <p class="text-[11px] font-extrabold text-purple-600 italic italic">Traffic Manager</p>
+            </div>
+            <div class="p-2 border rounded bg-slate-50 text-center">
+                <p class="text-[9px] font-bold text-slate-400 uppercase">L4 / Régional</p>
+                <p class="text-[11px] font-extrabold text-slate-700 italic italic">Load Balancer</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+        <div class="card bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+            <h4 class="font-bold text-sm mb-3 underline">BGP & Connectivité</h4>
+            <ul class="space-y-2 text-[11px] text-slate-600">
+                <li><i class="fas fa-sync-alt text-green-500 mr-1"></i> <span class="font-bold">BGP :</span> Routage dynamique. Détecte les pannes et reroute automatiquement.</li>
+                <li><i class="fas fa-project-diagram text-blue-500 mr-1"></i> <span class="font-bold">Virtual WAN Standard :</span> Requis pour connecter un <strong>ExpressRoute</strong>.</li>
+            </ul>
+        </div>
+        <div class="card bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+            <h4 class="font-bold text-sm mb-3 underline">Network Watcher</h4>
+            <ul class="space-y-2 text-[11px] text-slate-600">
+                <li><span class="font-bold">IP Flow Verify :</span> Vérifie si un paquet est bloqué par un <strong>NSG</strong>.</li>
+                <li><span class="font-bold">Next Hop :</span> Identifie si le trafic est mal dirigé (problème d'<strong>UDR</strong>).</li>
+            </ul>
+        </div>
+    </div>
+</section>
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6">
                 <h4 class="font-bold mb-4 border-b pb-2">Load Balancing Decision</h4>
                 <div class="grid md:grid-cols-3 gap-4">
