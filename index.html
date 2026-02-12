@@ -46,6 +46,85 @@
                 <span class="bg-blue-100 p-2 rounded-lg text-blue-600"><i class="fas fa-database"></i></span>
                 Storage Account & Data Lake
             </h3>
+            <section id="storage" class="mb-12 scroll-mt-10">
+    <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+        <span class="bg-blue-100 p-2 rounded-lg text-blue-600"><i class="fas fa-database"></i></span>
+        Storage Account Capabilities
+    </h3>
+    
+    <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6 overflow-hidden">
+        <h4 class="font-bold text-lg mb-4 text-blue-700"><i class="fas fa-list-check mr-2"></i>Comparatif des types de comptes</h4>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+                <thead>
+                    <tr class="bg-slate-100 text-slate-700 uppercase">
+                        <th class="p-3 border">Account Type</th>
+                        <th class="p-3 border">Services</th>
+                        <th class="p-3 border">Performance</th>
+                        <th class="p-3 border">Replication</th>
+                    </tr>
+                </thead>
+                <tbody class="text-slate-600">
+                    <tr>
+                        <td class="p-3 border font-bold bg-orange-50 text-orange-700 italic">General Purpose v2</td>
+                        <td class="p-3 border text-[10px]">Blob, File, Table, Disk, Queue, Data Lake Gen2</td>
+                        <td class="p-3 border italic text-blue-700">Standard / Premium (Disk only)</td>
+                        <td class="p-3 border italic text-red-700">LRS, GRS, RA-GRS, ZRS, GZRS, RA-GZRS</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3 border font-bold bg-blue-50 text-blue-700 italic">General Purpose v1</td>
+                        <td class="p-3 border text-[10px]">Blob, File, Queue, Table, Disk</td>
+                        <td class="p-3 border italic text-blue-700">Standard / Premium (Disk only)</td>
+                        <td class="p-3 border italic text-red-700">LRS, GRS, RA-GRS</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3 border font-bold bg-purple-50 text-purple-700 italic">BlockBlobStorage</td>
+                        <td class="p-3 border text-[10px]">Blob (Block & Append)</td>
+                        <td class="p-3 border font-bold text-purple-700">Premium</td>
+                        <td class="p-3 border italic text-red-700 text-red-700 font-bold">LRS, ZRS</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3 border font-bold bg-red-50 text-red-700 italic">FileStorage</td>
+                        <td class="p-3 border text-[10px]">File Only</td>
+                        <td class="p-3 border font-bold text-red-700">Premium</td>
+                        <td class="p-3 border italic text-red-700 font-bold">LRS, ZRS</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3 border font-bold bg-green-50 text-green-700 italic">BlobStorage</td>
+                        <td class="p-3 border text-[10px]">Blob (Block & Append)</td>
+                        <td class="p-3 border italic">Standard (Hot, Cool, Archive)</td>
+                        <td class="p-3 border italic text-red-700">LRS, GRS, RA-GRS</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+        <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <h4 class="font-bold text-lg mb-3">🔥 Highlights Exam</h4>
+            <ul class="space-y-2 text-sm text-slate-600">
+                <li class="flex items-start gap-2">
+                    <i class="fas fa-bolt text-yellow-500 mt-1"></i>
+                    <span><strong>BlockBlobStorage:</strong> Maximise le débit (throughput) et minimise la latence (SSD).</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <i class="fas fa-lock text-red-500 mt-1"></i>
+                    <span><strong>Immutabilité:</strong> Empêche la modification/suppression (Time-Based Retention).</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <h4 class="font-bold text-lg mb-3">📡 Endpoints & Sécurité</h4>
+            <ul class="space-y-2 text-sm text-slate-600">
+                <li><span class="font-semibold text-blue-600">Service Endpoints:</span> Via Azure Backbone. Pas pour le trafic On-premise.</li>
+                <li><span class="font-semibold text-green-600">Private Endpoint:</span> Crée une IP privée dans le VNET (Nécessite VPN/ER pour On-prem).</li>
+                <li><span class="font-semibold">ADLS Gen2:</span> Active le <strong>Hierarchical Namespace</strong> (Sécurité niveau répertoire).</li>
+            </ul>
+        </div>
+    </div>
+</section>
             
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200">
